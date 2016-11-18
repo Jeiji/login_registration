@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Email Validation</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" media="screen" title="no title">
+    <link rel="stylesheet" href="{% static 'logreg/style.css' %}">
+  </head>
+  <body>
+    <h3>Registration</h3>
+    {% if messages %}
+      {% for message in messages %}
+        {% if message.extra_tags == 'register' %}
+          <p class="{{ message.tags }}" >{{message}}</p>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    <form action="/add_book_process/<{{session.id}}>" method="post">
+      {% csrf_token %}
+      Book Title:
+      <input type="text" name="title" >
+      Author:
+      <select class="" name="author_name">
+        {% for  in  %}
+          <option value="{{author.name}}">{{ author.name }}</option>
+        {% endfor %}
+      </select>
+      {% if  %}
+        New Author:
+        <input type="text" name="author_name">
+        {% else %}
+        New Author:
+        <input type="text" name="author_name" disabled>
+      {% endif %}
+      Review:
+      <textarea name="review_text" placeholder="Add a review!"></textarea>
+      Rating:
+      <input type="number" name="rating" min="1" max="5">
+      <input type="submit" value="Submit">
+    </form>
+    {% for author in authors %}
+        --{{ author.name }}--
+    {% endfor %}
+
+  </body>
+</html>

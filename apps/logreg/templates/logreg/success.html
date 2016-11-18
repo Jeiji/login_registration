@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Email Validation</title>
+  {% load staticfiles %}
+  <link rel="stylesheet" href="{% static 'logreg/style.css' %}">
+</head>
+<body>
+  {% if messages %}
+    {% for message in messages %}
+      <p class="{{ message.tags }}" >{{message}}</p>
+    {% endfor %}
+  {% endif %}
+    {{ user.first_name }}, you should
+    <a href="/logout">GETOUT</a>
+</body>
+</html>
